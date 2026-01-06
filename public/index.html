@@ -26,19 +26,21 @@
             password:password
         });
         //storing in localstorage
-        localStorage.setItem("token",response.data.token)
+        localStorage.setItem("token",response.data.token) //setting up local storage
         alert("You are signed in!")
         }
         async function getUserInformation(){
-            axios.get("http://localhost:3000/me",{
+            const response = await axios.get("http://localhost:3000/me",{
                 headers :{
                     token:localStorage.getItem("token")
                 }
             })
-        getUserInformation();
+            document.getElementById("information").innerHTML= "Username : " + response.data.username + "password : " + response.data.password
         }
-        
-
+        getUserInformation();
+        function logout(){
+            localStorage.removeItem("token");
+        }
     </script>
 
 </head>
